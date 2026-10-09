@@ -5,7 +5,7 @@
 FlousFlow Responsive
 ====================
 
-Responsive Odoo 19 backend enhancements for the FlousFlow platform.
+Responsive Odoo 20 backend enhancements for the FlousFlow platform.
 
 Features
 --------
@@ -15,10 +15,10 @@ Features
 * Light and dark mode styling.
 * List, kanban, pivot, search, and core UI improvements.
 
-This module is intended for Odoo 19 Community installations.
+This module is intended for Odoo 20 Community installations.
 """,
     "category": "Themes/Backend",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "author": "FlousFlow",
     "maintainer": "FlousFlow",
     "website": "https://github.com/FlousFlow",

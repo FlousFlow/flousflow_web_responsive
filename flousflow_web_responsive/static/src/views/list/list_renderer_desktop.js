@@ -4,7 +4,7 @@ import { useService } from "@web/core/utils/hooks";
 import { patch } from "@web/core/utils/patch";
 import { ListRenderer } from "@web/views/list/list_renderer";
 import { _t } from "@web/core/l10n/translation";
-import { onWillDestroy, useState } from "@odoo/owl";
+import { onWillDestroy, proxy } from "@odoo/owl";
 
 export const patchListRendererDesktop = () => ({
     setup() {
@@ -27,7 +27,7 @@ export const patchListRendererDesktop = () => ({
             list === list.model.root &&
             actionId &&
             actionType === "ir.actions.act_window";
-        this.studioEditable = useState({ value: isPotentiallyEditable });
+        this.studioEditable = proxy({ value: isPotentiallyEditable });
 
         if (isPotentiallyEditable) {
             const computeStudioEditable = (action) => {

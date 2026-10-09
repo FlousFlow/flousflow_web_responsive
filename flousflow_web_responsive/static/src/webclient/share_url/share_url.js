@@ -20,12 +20,12 @@ export async function shareUrl() {
 export function shareUrlMenuItem(env) {
     return {
         type: "item",
-        hide: env.isSmall || !isDisplayStandalone(),
+        hide: env.services.ui.isSmall || !isDisplayStandalone(),
         id: "share_url",
         description: markup`
             <div class="d-flex align-items-center justify-content-between">
                 <span>${_t("Share")}</span>
-                <span class="fa fa-share-alt"></span>
+                <span class="oi" data-icon="share"></span>
             </div>`,
         callback: shareUrl,
         sequence: 25,

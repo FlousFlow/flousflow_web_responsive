@@ -7,15 +7,16 @@ import { computeAppsAndMenuItems, reorderApps } from "@web/webclient/menus/menu_
 import {
     ControllerNotFoundError,
     standardActionServiceProps,
-} from "@web/webclient/actions/action_service";
+} from "@web/webclient/actions/action_plugin";
 import { HomeMenu } from "./home_menu";
 
-import { Component, onMounted, onWillUnmount, reactive, xml } from "@odoo/owl";
+import { render } from "@web/owl2/utils";
+import { Component, onMounted, onWillUnmount, proxy, xml, useProps } from "@odoo/owl";
 
 export const homeMenuService = {
     dependencies: ["action"],
     start(env) {
-        const state = reactive({
+        const state = proxy({
             hasHomeMenu: false, // true iff the HomeMenu is currently displayed
             hasBackgroundAction: false, // true iff there is an action behind the HomeMenu
             toggle,
@@ -24,19 +25,19 @@ export const homeMenuService = {
         class HomeMenuAction extends Component {
             static components = { HomeMenu };
             static target = "current";
-            static props = { ...standardActionServiceProps };
-            static template = xml`<HomeMenu t-props="homeMenuProps"/>`;
+            static template = xml`<HomeMenu t-props="this.homeMenuProps"/>`;
             static displayName = _t("Home");
+            props = useProps({ ...standardActionServiceProps });
 
             setup() {
                 this.menus = useService("menu");
                 onMounted(() => this.onMounted());
                 onWillUnmount(this.onWillUnmount);
-                useBus(this.env.bus, "MENUS:APP-CHANGED", () => this.render());
+                useBus(this.env.bus, "MENUS:APP-CHANGED", () => render(this));
             }
             get homeMenuProps() {
                 const homemenuConfig = JSON.parse(user.settings?.homemenu_config || "null");
-                const apps = reactive(
+                const apps = proxy(
                     computeAppsAndMenuItems(this.menus.getMenuAsTree("root")).apps
                 );
                 if (homemenuConfig) {

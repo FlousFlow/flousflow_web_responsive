@@ -6,20 +6,22 @@ import { useSortable } from "@web/core/utils/sortable_owl";
 
 import {
     Component,
-    useExternalListener,
+    useListener,
     onMounted,
     onPatched,
     onWillUpdateProps,
-    useState,
-    useRef,
+    proxy,
+    signal,
+    t,
+    useProps,
 } from "@odoo/owl";
 
 class FooterComponent extends Component {
     static template = "flousflow_web_responsive.HomeMenu.CommandPalette.Footer";
-    static props = {
+    props = useProps({
         //prop added by the command palette
-        switchNamespace: { type: Function, optional: true },
-    };
+        switchNamespace: t.function().optional(),
+    });
 
     setup() {
         this.controlKey = isMacOS() ? "COMMAND" : "CONTROL";
@@ -35,41 +37,10 @@ class FooterComponent extends Component {
 export class HomeMenu extends Component {
     static template = "flousflow_web_responsive.HomeMenu";
     static components = {  };
-    static props = {
-        apps: {
-            type: Array,
-            element: {
-                type: Object,
-                shape: {
-                    actionID: Number,
-                    href: String,
-                    appID: Number,
-                    id: Number,
-                    label: String,
-                    parents: String,
-                    webIcon: {
-                        type: [
-                            Boolean,
-                            String,
-                            {
-                                type: Object,
-                                optional: 1,
-                                shape: {
-                                    iconClass: String,
-                                    color: String,
-                                    backgroundColor: String,
-                                },
-                            },
-                        ],
-                        optional: true,
-                    },
-                    webIconData: { type: String, optional: 1 },
-                    xmlid: String,
-                },
-            },
-        },
-        reorderApps: { type: Function },
-    };
+    props = useProps({
+        apps: t.array(),
+        reorderApps: t.function(),
+    });
 
     /**
      * @param {Object} props
@@ -91,15 +62,15 @@ export class HomeMenu extends Component {
         this.menus = useService("menu");
         this.homeMenuService = useService("home_menu");
         this.ui = useService("ui");
-        this.state = useState({
+        this.state = proxy({
             focusedIndex: null,
             isIosApp: isIosApp(),
         });
-        this.inputRef = useRef("input");
-        this.rootRef = useRef("root");
+        this.inputRef = signal.ref();
+        this.rootRef = signal.ref();
         this.pressTimer;
 
-        if (!this.env.isSmall) {
+        if (!this.ui.isSmall) {
             this._registerHotkeys();
         }
 
@@ -128,7 +99,7 @@ export class HomeMenu extends Component {
         });
 
         onPatched(() => {
-            if (this.state.focusedIndex !== null && !this.env.isSmall) {
+            if (this.state.focusedIndex !== null && !this.ui.isSmall) {
                 const selectedItem = document.querySelector(".o_home_menu .o_menuitem.o_focused");
                 // When TAB is managed externally the class o_focused disappears.
                 if (selectedItem) {
@@ -251,8 +222,8 @@ export class HomeMenu extends Component {
     }
 
     _focusInput() {
-        if (!this.env.isSmall && this.inputRef.el) {
-            this.inputRef.el.focus({ preventScroll: true });
+        if (!this.ui.isSmall && this.inputRef()) {
+            this.inputRef().focus({ preventScroll: true });
         }
     }
 
@@ -290,7 +261,7 @@ export class HomeMenu extends Component {
 
     /**
      * @param {Object} params
-     * @param {HTMLElement} params.element
+     * @param {Object} params.element
      */
     _sortStart({ element, addClass }) {
         addClass(element.children[0], "o_dragged_app");
@@ -331,12 +302,12 @@ export class HomeMenu extends Component {
                 allowRepeat: true,
             });
         });
-        useExternalListener(window, "keydown", this._onKeydownFocusInput);
+        useListener(window, "keydown", this._onKeydownFocusInput);
     }
 
     _onKeydownFocusInput() {
         if (
-            document.activeElement !== this.inputRef.el &&
+            document.activeElement !== this.inputRef() &&
             this.ui.activeElement === document &&
             !["TEXTAREA", "INPUT"].includes(document.activeElement.tagName)
         ) {
@@ -347,11 +318,11 @@ export class HomeMenu extends Component {
     _onInputSearch() {
         const onClose = () => {
             this._focusInput();
-            if (this.inputRef.el) {
-                this.inputRef.el.value = "";
+            if (this.inputRef()) {
+                this.inputRef().value = "";
             }
         };
-        const searchValue = this.compositionStart ? "/" : `/${this.inputRef.el.value.trim()}`;
+        const searchValue = this.compositionStart ? "/" : `/${this.inputRef().value.trim()}`;
         this.compositionStart = false;
         this.command.openMainPalette({ searchValue, FooterComponent }, onClose);
     }

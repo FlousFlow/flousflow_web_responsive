@@ -1,16 +1,18 @@
 import { patch } from "@web/core/utils/patch";
 import { PivotRenderer } from "@web/views/pivot/pivot_renderer";
+import { useService } from "@web/core/utils/hooks";
 
-import { useEffect, useRef } from "@odoo/owl";
+import { useEffect, signal } from "@odoo/owl";
 
 patch(PivotRenderer.prototype, {
     setup() {
         super.setup();
-        this.root = useRef("root");
-        if (this.env.isSmall) {
+        this.ui = useService("ui");
+        this.root = signal.ref();
+        if (this.ui.isSmall) {
             useEffect(() => {
-                if (this.root.el) {
-                    const tooltipElems = this.root.el.querySelectorAll("*[data-tooltip]");
+                if (this.root()) {
+                    const tooltipElems = this.root().querySelectorAll("*[data-tooltip]");
                     for (const el of tooltipElems) {
                         el.removeAttribute("data-tooltip");
                         el.removeAttribute("data-tooltip-position");
@@ -18,12 +20,5 @@ patch(PivotRenderer.prototype, {
                 }
             });
         }
-    },
-
-    getPadding(cell) {
-        if (this.env.isSmall) {
-            return 5 + cell.indent * 5;
-        }
-        return super.getPadding(...arguments);
     },
 });

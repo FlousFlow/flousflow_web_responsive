@@ -14,19 +14,19 @@ export function switchColorSchemeItem(env) {
                         userColorScheme === "system" ? "active" : ""
                     }" data-color-scheme="system">
                         <span class="visually-hidden">${_t("System")}</span>
-                        <i class="fa fa-fw fa-desktop" data-tooltip="${_t("System")}"></i>
+                        <i class="oi" data-icon="desktop_windows" data-tooltip="${_t("System")}"></i>
                     </button>
                     <button class="btn btn-secondary btn-sm ${
                         userColorScheme === "light" ? "active" : ""
                     }" data-color-scheme="light">
                         <span class="visually-hidden">${_t("Light")}</span>
-                        <i class="fa fa-fw fa-sun-o" data-tooltip="${_t("Light")}"></i>
+                        <i class="oi" data-icon="light_mode" data-tooltip="${_t("Light")}"></i>
                     </button>
                     <button class="btn btn-secondary btn-sm ${
                         userColorScheme === "dark" ? "active" : ""
                     }" data-color-scheme="dark">
                         <span class="visually-hidden">${_t("Dark")}</span>
-                        <i class="fa fa-fw fa-moon-o" data-tooltip="${_t("Dark")}"></i>
+                        <i class="oi" data-icon="dark_mode" data-tooltip="${_t("Dark")}"></i>
                     </button>
                 </div>
             </div>`,
