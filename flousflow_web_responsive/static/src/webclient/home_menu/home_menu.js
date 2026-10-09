@@ -302,7 +302,9 @@ export class HomeMenu extends Component {
                 allowRepeat: true,
             });
         });
-        useListener(window, "keydown", this._onKeydownFocusInput);
+        // Owl 3 useListener does not bind handlers to the component, so a
+        // bare method reference would receive `window` as `this`.
+        useListener(window, "keydown", () => this._onKeydownFocusInput());
     }
 
     _onKeydownFocusInput() {
