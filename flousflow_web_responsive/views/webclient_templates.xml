@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <!-- Odoo 20: t-set inside a t-call body no longer propagates to the
-         sub-template, so the login layout variables are passed through
-         t-call attributes instead. -->
+         sub-template, and t-call attributes are only visible to the
+         sub-template itself, not to the t-call body where
+         login_card_classes is consumed. body_classname is consumed by
+         web.frontend_layout so it is passed as a t-call attribute
+         (replacing its "bg-100" default), while login_card_classes is
+         consumed by the t-call body so it is set in the caller scope. -->
     <template id="webclient_login" inherit_id="web.login_layout">
+        <xpath expr="//t[@t-call='web.frontend_layout']" position="before">
+            <t t-set="login_card_classes" t-value="'rounded-0 shadow-sm bg-white'"/>
+        </xpath>
         <xpath expr="//t[@t-call='web.frontend_layout']" position="attributes">
             <attribute name="body_classname.f">o_home_menu_background</attribute>
-            <attribute name="login_card_classes.f">rounded-0 shadow-sm bg-white</attribute>
         </xpath>
     </template>
 
