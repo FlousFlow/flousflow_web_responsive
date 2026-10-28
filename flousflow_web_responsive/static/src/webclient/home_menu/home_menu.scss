@@ -40,6 +40,7 @@
         .o_app_icon {
             width: $o-home-menu-app-icon-max-width;
             aspect-ratio: 1;
+            border-radius: 8px !important;
             padding: $o-home-menu-app-icon-padding;
             background-color: var(--AppSwitcherIcon-background, #{$o-home-menu-app-icon-background-color});
             object-fit: cover;
@@ -117,7 +118,7 @@
             .o_app_icon {
                 width: $o-home-menu-app-icon-max-width * 0.75;
                 height: $o-home-menu-app-icon-max-width * 0.75;
-                margin-right: map-get($spacers, 4);
+                margin-inline-end: map-get($spacers, 4);
             }
 
             .o_caption {
@@ -136,5 +137,37 @@
     .o_home_menu .o_app .o_caption {
         color: $o-home-menu-custom-caption-color;
         text-shadow: $o-home-menu-custom-caption-shadow;
+    }
+}
+
+// Keep the module catalog aligned with the Enterprise RTL layout.
+body.o_rtl.o_web_client {
+    .o_home_menu {
+        display: flex;
+        flex-direction: column;
+        padding-left: 1rem;
+        padding-right: 1rem;
+
+        > .container {
+            padding-left: 0;
+            padding-right: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .o_apps {
+            margin-top: 0 !important;
+            // Enterprise keeps the app catalog in left-to-right reading order
+            // even when the app labels are translated into Arabic.
+            direction: rtl;
+
+            @include media-breakpoint-up(md) {
+                margin-top: 1.5rem !important;
+            }
+        }
+
+        .o_app {
+            border-radius: 12px !important;
+        }
     }
 }

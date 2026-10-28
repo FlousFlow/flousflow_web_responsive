@@ -1,3 +1,93 @@
 .o_list_renderer {
-    --ListRenderer-thead-border-end-color: transparent;
+    --ListRenderer-thead-border-end-color: #{$o-border-color};
+    // Enterprise gives list views an opaque white surface in light mode;
+    // Community leaves it transparent over the gray web-client canvas.
+    background-color: #fff;
+
+    .o_list_table .o_data_row {
+        border-bottom-color: $o-border-color;
+    }
+
+    // Empty inline one2many footers collapse in Enterprise instead of adding
+    // Bootstrap's default vertical cell padding below the final blank row.
+    .o_list_table tfoot.o_list_footer td:empty {
+        padding: 0;
+    }
+}
+
+// Enterprise frames the list surface when it is paired with the search panel.
+// Keep the physical left offset in RTL, matching the Enterprise web client.
+.o_search_panel_resize + .o_list_renderer,
+.o_search_panel_sidebar + .o_list_renderer {
+    /*rtl:ignore*/
+    margin-left: 16px;
+    border: 1px solid $o-border-color;
+    border-bottom: 0;
+    border-radius: 0.75rem 0.75rem 0 0;
+}
+
+// Enterprise presents the placeholder rows as normal content. Keep local
+// sample-model rows legible and remove the empty-state layer above them.
+.o_list_view.o_project_project_list_view .o_content.o_view_sample_data:has(.o_data_row) .o_view_nocontent {
+    display: none;
+}
+
+.o_list_view.o_project_project_list_view .o_content.o_view_sample_data .o_data_row {
+    opacity: 1;
+}
+
+body.o_rtl .o_control_panel {
+    .btn {
+        --btn-padding-y: 5px !important;
+        --btn-padding-x: 10px !important;
+    }
+    padding-bottom: 16px;
+    border-bottom: 0;
+
+    .o_cp_switch_buttons {
+        gap: 4px;
+        padding: 4px;
+        border: 1px solid $o-gray-300;
+        border-radius: 10px;
+        background-color: $o-view-background-color;
+
+        .o_switch_view {
+            padding: 2px 6px;
+            border: 1px solid transparent;
+            border-radius: 6px;
+            background-color: transparent;
+        }
+    }
+}
+
+// Enterprise reserves room for its user-seat display below the user list
+// control panel, even when that display is empty.
+body.o_rtl .o_list_view:has(th[data-name="login"]) .o_control_panel {
+    padding-bottom: 40px;
+}
+
+@include media-breakpoint-up(lg) {
+    body.o_rtl .o_control_panel .o_control_panel_actions {
+        height: 100%;
+    }
+}
+
+@include media-breakpoint-down(md) {
+    body.o_rtl .o_control_panel .o_cp_switch_buttons {
+        // Keep the mobile control-panel height aligned with Odoo Enterprise.
+        gap: 0;
+        padding: 0;
+        border: 0;
+        border-radius: 6px;
+        background-color: transparent;
+
+        > .o-dropdown {
+            // Enterprise uses the subtle surface color for the compact view
+            // switch, while Community's btn-secondary is too prominent here.
+            --btn-bg: var(--gray-200);
+            --btn-border-color: var(--gray-300);
+            --btn-hover-bg: var(--gray-300);
+            border-radius: 6px;
+        }
+    }
 }

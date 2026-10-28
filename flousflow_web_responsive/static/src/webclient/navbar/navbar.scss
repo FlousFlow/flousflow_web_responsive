@@ -14,8 +14,73 @@
     }
 }
 
+body.o_rtl .o_menu_brand {
+    margin-inline-start: 16px !important;
+    margin-inline-end: 1px !important;
+}
+
+body.o_rtl .o_burger_menu .o_sidebar_close {
+    border-radius: 6px;
+}
+
+.o_app_menu_sidebar .o_burger_menu_content.o_burger_menu_app li {
+    cursor: pointer;
+}
+
+@include media-breakpoint-up(md) {
+    // Enterprise keeps the desktop user-menu target taller than its avatar.
+    // This also aligns the dropdown's anchor with the navbar's vertical center.
+    .o_main_navbar .o_menu_systray .o_user_menu.dropdown-toggle {
+        height: 36px;
+        margin-block: -5px;
+        border-radius: 6px;
+    }
+
+    // Enterprise keeps account and database details inside the user menu,
+    // leaving only the avatar visible in the navbar.
+    .o_main_navbar .o_user_menu .oe_topbar_name {
+        display: none !important;
+    }
+}
+
+// Odoo 20 positions the user's presence badge on the avatar's right edge
+// even in RTL, while the Enterprise reference mirrors it to the left edge.
+body.o_rtl .o_main_navbar .o_user_menu .o-mail-DiscussAvatar {
+    > mask use,
+    > g {
+        // The RTL asset compiler flips the horizontal translation sign.
+        transform: translate(1px, 20px) !important;
+    }
+}
+
+// Match the compact section headings used by Enterprise navbar dropdowns.
+.o-dropdown--menu:has(.o_dropdown_menu_group_entry) {
+    .dropdown-header.dropdown-menu_group {
+        padding-block-start: 4px;
+    }
+}
+
 // Ensuring SuperUser Design menu is not compressed in Enterprise
 // ============================================================================
 body.o_is_superuser .o_menu_systray {
     border-image-outset: map-get($border-widths, 5);
+}
+
+// Match Enterprise's RTL backend shell. Odoo's RTL asset build flips the
+// source declaration below, so its compiled value is RTL in the browser.
+body.o_rtl.o_web_client {
+    direction: rtl;
+
+    .o_main_navbar,
+    .o_action_manager,
+    .o_content {
+        // The RTL asset compiler flips this to RTL, matching Enterprise's
+        // shell while preserving the native direction of nested controls.
+        direction: ltr;
+    }
+
+    .o_main_navbar .o_menu_systray {
+        margin-inline-start: auto !important;
+        margin-inline-end: 0 !important;
+    }
 }

@@ -3,7 +3,10 @@
 // No CSS hacks, variables overrides only
 
 .o_popover {
-    --border-color: #{$popover-border-color};
+    --border-color: #56575e;
+    --popover-border-radius: #{$o-border-radius-xl};
+    border-color: #56575e;
+    border-radius: $o-border-radius-xl;
 
     .table {
         --table-bg: #{$popover-bg};

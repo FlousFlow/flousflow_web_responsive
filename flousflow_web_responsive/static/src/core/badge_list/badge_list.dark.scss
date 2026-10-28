@@ -1,8 +1,46 @@
 .badge {
-    @for $size from 1 through length($o-colors) {
+    // Match the muted contextual badges used by the Enterprise dark theme.
+    &.text-bg-primary {
+        --bg-opacity: .15;
+        background-color: rgba(146, 66, 125, var(--bg-opacity)) !important;
+        color: #c175ad !important;
+    }
+
+    &.text-bg-success {
+        --bg-opacity: .15;
+        background-color: rgba(34, 176, 83, var(--bg-opacity)) !important;
+        color: #30c06e !important;
+    }
+
+    &.text-bg-info {
+        --bg-opacity: .15;
+        background-color: rgba(113, 173, 234, var(--bg-opacity)) !important;
+        color: #71adea !important;
+    }
+
+    &.text-bg-warning {
+        --bg-opacity: .15;
+        background-color: rgba(227, 156, 80, var(--bg-opacity)) !important;
+        color: #d89d54 !important;
+    }
+
+    &.text-bg-danger {
+        --bg-opacity: .15;
+        background-color: rgba(203, 47, 47, var(--bg-opacity)) !important;
+        color: #ff5757 !important;
+    }
+
+    &.o_badge_color_0 {
+        background-color: #{nth($o-colors-bg-subtle, 1)} !important;
+        color: #{nth($o-colors-text-emphasis, 1)} !important;
+        border-color: currentColor;
+    }
+
+    // Color 0 is Odoo's neutral default badge, not a colored category badge.
+    @for $size from 2 through length($o-colors) {
         &.o_badge_color_#{$size - 1} {
-            background-color: #{mix(nth($o-colors, $size), $o-view-background-color, 15%)} !important;
-            color: #{adjust-color(nth($o-colors, $size), $lightness: 5%, $saturation: -15%)} !important;
+            background-color: #{nth($o-colors-bg-subtle, $size)} !important;
+            color: #{nth($o-colors-text-emphasis, $size)} !important;
         }
     }
 }

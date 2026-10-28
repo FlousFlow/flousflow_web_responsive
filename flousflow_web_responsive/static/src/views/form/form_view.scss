@@ -1,0 +1,127 @@
+body.o_rtl .o_form_view {
+    // Odoo Enterprise 20 uses an 8px sheet radius on desktop forms.
+    --formView-sheet-border-radius-md: 8px;
+
+    .o_form_sheet_bg {
+        padding-top: 0;
+    }
+
+    .o_form_statusbar {
+        padding: 0 0 8px;
+    }
+
+}
+
+@include media-breakpoint-up(md) {
+    body.o_rtl .o_dialog {
+        .modal-content {
+            border: 1px solid rgba(255, 255, 255, 0.176);
+            border-radius: 8px;
+        }
+
+        // Keep the inner modal corners one pixel inside the 8px outer frame.
+        .modal-header {
+            border-radius: 7px 7px 0 0;
+        }
+
+        .modal-footer {
+            border-radius: 0 0 7px 7px;
+        }
+
+        .modal-header .btn-close {
+            border-radius: 6px;
+        }
+
+        .modal-footer .btn {
+            border-radius: 6px;
+        }
+
+        .o_form_sheet > .d-flex.flex-column.flex-md-row.align-items-center.gap-3 > .o_field_contact_image {
+            flex: 0 0 162px;
+            height: 162px;
+            width: 162px;
+            --border-radius: 6px;
+
+            img {
+                height: 100%;
+                object-fit: cover;
+                width: 100%;
+            }
+        }
+
+        // Odoo's radio widget adds w-100 on touch devices. In the user
+        // preferences dialog this overrides the requested horizontal layout.
+        .o_field_radio > .o_input.o_horizontal {
+            display: inline-flex !important;
+            width: auto !important;
+
+            > .o_radio_item.w-100 {
+                width: auto !important;
+                flex: 0 0 auto;
+            }
+        }
+    }
+}
+
+body.o_rtl .o_form_view label[for^="color_scheme"] {
+    min-width: 7.5rem;
+}
+
+@include media-breakpoint-down(md) {
+    body.o_rtl .modal-content .o_form_sheet > .d-flex.flex-column.flex-md-row.align-items-center.gap-3 > .o_field_contact_image {
+        flex: 0 0 200px;
+        height: 200px;
+        width: 200px;
+
+        > .d-inline-block.position-relative {
+            height: 100%;
+            width: 100%;
+        }
+
+        img {
+            height: 100%;
+            object-fit: cover;
+            width: 100%;
+        }
+    }
+}
+
+body.o_rtl .o_base_settings_view .o_control_panel {
+    margin-bottom: 0;
+}
+
+@include media-breakpoint-up(md) {
+    body.o_rtl .o_base_settings_view .o_control_panel {
+        padding-bottom: 16px;
+    }
+
+    body.o_rtl .o_base_settings_view .o_setting_container {
+        flex-direction: row;
+
+        .settings_tab {
+            .selected {
+                // RTL processing mirrors physical box-shadow offsets. Keep
+                // the source offset positive so it lands on the right edge.
+                box-shadow: inset 2px 0 0 $o-component-active-border;
+            }
+
+            .tab {
+                padding-inline-start: $o-horizontal-padding;
+                padding-inline-end: $o-horizontal-padding * 2;
+                text-align: start;
+
+                .icon {
+                    margin-inline-start: 0;
+                    margin-inline-end: 10px;
+                }
+            }
+        }
+
+        .o_setting_right_pane {
+            margin-inline-start: 8px;
+            margin-inline-end: 0;
+            padding-inline-start: 12px;
+            padding-inline-end: 0;
+        }
+    }
+}

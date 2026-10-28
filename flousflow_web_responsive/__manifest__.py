@@ -18,15 +18,17 @@ Features
 This module is intended for Odoo 20 Community installations.
 """,
     "category": "Themes/Backend",
-    "version": "20.0.1.0.0",
+    "version": "20.0.1.0.15",
     "author": "FlousFlow",
     "maintainer": "FlousFlow",
     "website": "https://github.com/FlousFlow",
-    "depends": ["web", "base_setup"],
+    "depends": ["web", "base_setup", "mail"],
     "auto_install": False,
     "data": [
         "views/webclient_templates.xml",
+        "views/res_users_views.xml",
     ],
+    "post_init_hook": "post_init_hook",
     "assets": {
         "web._assets_primary_variables": [
             (
@@ -60,6 +62,8 @@ This module is intended for Odoo 20 Community installations.
         ],
         "web.assets_backend": [
             "flousflow_web_responsive/static/src/webclient/**/*.scss",
+            "flousflow_web_responsive/static/src/search/**/*.scss",
+            "flousflow_web_responsive/static/src/search/**/*.xml",
             "flousflow_web_responsive/static/src/views/**/*.scss",
             "flousflow_web_responsive/static/src/core/**/*",
             "flousflow_web_responsive/static/src/webclient/**/*.js",
@@ -71,11 +75,25 @@ This module is intended for Odoo 20 Community installations.
             "flousflow_web_responsive/static/src/webclient/**/*.xml",
             "flousflow_web_responsive/static/src/views/**/*.js",
             "flousflow_web_responsive/static/src/views/**/*.xml",
+            (
+                "remove",
+                "flousflow_web_responsive/static/src/views/activity/activity_renderer.js",
+            ),
+            (
+                "remove",
+                "flousflow_web_responsive/static/src/views/activity/activity_renderer.xml",
+            ),
             ("remove", "flousflow_web_responsive/static/src/views/pivot/**"),
             # Don't include dark mode files in light mode
             ("remove", "flousflow_web_responsive/static/src/**/*.dark.scss"),
         ],
         "web.assets_backend_lazy": [
+            (
+                "before",
+                "mail/static/src/views/web/activity/activity_renderer.xml",
+                "flousflow_web_responsive/static/src/views/activity/activity_renderer.xml",
+            ),
+            "flousflow_web_responsive/static/src/views/activity/**",
             "flousflow_web_responsive/static/src/views/pivot/**",
         ],
         "web.assets_backend_lazy_dark": [

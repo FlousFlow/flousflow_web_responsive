@@ -1,0 +1,68 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * flousflow_web_responsive
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 20.0\n"
+"PO-Revision-Date: 2026-10-22 00:00+0000\n"
+"Last-Translator: FlousFlow\n"
+"Language-Team: Arabic\n"
+"MIME-Version: 1.0\n"
+"Language: ar\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. module: product
+#: model_terms:ir.ui.view,arch_db:product.product_template_form_view
+msgid "<span>per</span>"
+msgstr "<span>لكل</span>"
+
+#. module: product
+#: model_terms:ir.ui.view,arch_db:product.product_template_form_view
+msgid "Short Description"
+msgstr "وصف قصير"
+
+#. module: product
+#: model:ir.model.fields,field_description:product.field_product_product__is_storable
+#: model:ir.model.fields,field_description:product.field_product_template__is_storable
+msgid "Track Inventory"
+msgstr "تتبُع المخزون"
+
+#. module: flousflow_web_responsive
+#. odoo-javascript
+#: code:addons/flousflow_web_responsive/static/src/views/view_components/group_config_menu_patch.js:0
+msgid "Automations"
+msgstr "الأتمتة"
+
+#. module: flousflow_web_responsive
+#. odoo-javascript
+#: code:addons/flousflow_web_responsive/static/src/views/list/list_renderer_desktop.xml:0
+msgid "Add Custom Field"
+msgstr "إضافة حقل مخصص"
+
+#. module: flousflow_web_responsive
+#. odoo-javascript
+#: code:addons/flousflow_web_responsive/static/src/webclient/mysubscription_menu_translation.js:0
+#: model:ir.actions.client,name:mysubscription.action_mysubscription_dashboard
+#: model:ir.module.module,shortdesc:base.module_mysubscription
+msgid "My Subscription"
+msgstr "اشتراكي"
+
+#. module: flousflow_web_responsive
+#. odoo-javascript
+#: code:addons/flousflow_web_responsive/static/src/views/activity/activity_renderer.js:0
+msgid "Schedule activity"
+msgstr "جدولة النشاط"
+
+#. module: flousflow_web_responsive
+#. odoo-javascript
+#: code:addons/web/static/src/views/view_components/view_scale_selector.xml:0
+msgid "Show weekends"
+msgstr "إظهار نهاية الأسبوع"
+
+#. module: flousflow_web_responsive
+#. odoo-javascript
+#: code:addons/calendar/static/src/views/attendee_calendar/filter_section/attendee_calendar_calendar_filter_section.js:0
+msgid "My Activities"
+msgstr "أنشطتي"

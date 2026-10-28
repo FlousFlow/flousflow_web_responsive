@@ -36,7 +36,7 @@ $badge-border-radius: 0 !default;
 $progress-border-radius: 0 !default;
 $list-group-border-radius: 0 !default;
 $thumbnail-border-radius: 0 !default;
-$form-check-input-border-radius: 0 !default;
+$form-check-input-border-radius: .25em !default;
 
 // Typography
 //
@@ -72,7 +72,7 @@ $input-box-shadow: 0 !default;
 
 $input-focus-bg: $o-white !default;
 $input-focus-box-shadow: 0 !default;
-$input-focus-border-color: mix($o-enterprise-action-color, $o-gray-200) !default;
+$input-focus-border-color: #68A9AF !default;
 
 $form-check-input-checked-color: $o-white !default;
 $form-check-input-checked-border-color: $o-enterprise-action-color !default;
@@ -134,3 +134,9 @@ $thumbnail-box-shadow: 0 !default;
 
 $breadcrumb-active-color: $o-main-text-color !default;
 $breadcrumb-divider-color: $o-main-color-muted !default;
+// Odoo's list column chooser is part of the shared web client; keep its
+// minimum width aligned with the Enterprise RTL chooser in light mode.
+.o_optional_columns_dropdown.dropdown-menu {
+    min-width: 169px;
+    padding: 4px;
+}

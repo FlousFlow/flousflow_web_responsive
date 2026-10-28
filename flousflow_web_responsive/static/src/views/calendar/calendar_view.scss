@@ -1,0 +1,44 @@
+// Enterprise separates the RTL calendar side panel from the calendar canvas.
+// Keep the same spacing and canvas frame in the responsive backend.
+body.o_rtl .o_calendar_header {
+    // Community's calendar header has py-2; Enterprise removes that utility.
+    padding-block: 0 !important;
+    padding-inline: 1rem;
+    margin-block-start: 0;
+    margin-block-end: 1rem;
+    border-bottom: 0 !important;
+}
+
+.o_calendar_renderer {
+    border: 1px solid $o-border-color;
+    border-bottom: 0;
+    border-radius: $o-border-radius-xl $o-border-radius-xl 0 0;
+}
+
+@include media-breakpoint-up(md) {
+    body.o_rtl {
+        .o_calendar_sidepanel_container {
+            padding-inline-end: 1rem;
+            background-color: transparent !important;
+        }
+
+        // Odoo Enterprise removes the side-panel content inset on desktop
+        // and applies an 8px logical-end margin. Mirror that placement so the
+        // calendar filters align with the Enterprise reference.
+        .o_calendar_sidepanel_content {
+            margin-inline-end: 0.5rem !important;
+            padding-inline: 0 !important;
+        }
+
+        // The Enterprise calendar sidebar does not add vertical padding to
+        // its compact date picker. Community adds 8px on both ends, shifting
+        // every filter section down by 16px.
+        .o_calendar_sidepanel > .o_datetime_picker {
+            padding-block: 0 !important;
+        }
+
+        .o_calendar_renderer {
+            margin-inline: 1rem;
+        }
+    }
+}

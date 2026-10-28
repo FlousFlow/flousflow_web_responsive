@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="flousflow_web_responsive.ActivityViewFooter"
+       t-inherit="mail.ActivityViewFooter"
+       t-inherit-mode="extension">
+        <xpath expr="//span[hasclass('o_record_selector')]" position="replace">
+            <span class="btn btn-link o_record_selector cursor-pointer"
+                  t-att-aria-label="this.scheduleActivityLabel"
+                  t-on-click.prevent.stop="this.props.scheduleActivity">
+                <i class="oi pe-2" data-icon="add"/>
+                <t t-out="this.scheduleActivityLabel"/>
+            </span>
+        </xpath>
+    </t>
+</templates>

@@ -1,6 +1,6 @@
 // = Enterprise Main Navbar Variables
 // ============================================================================
-$o-navbar-background: $o-white !default;
+$o-navbar-background: $o-gray-100 !default;
 $o-navbar-padding-v: 10px !default;
 $o-navbar-border-bottom: 0 !default;
 $o-navbar-font-size: $o-font-size-base !default;
@@ -8,7 +8,7 @@ $o-navbar-font-size: $o-font-size-base !default;
 $o-navbar-entry-margin-h: 1px !default;
 $o-navbar-entry-border-radius: $o-border-radius !default;
 $o-navbar-entry-color: $o-main-text-color !default;
-$o-navbar-entry-padding-h: .63em !default;
+$o-navbar-entry-padding-h: $o-spacer * .5 !default;
 
 $o-navbar-entry-bg--hover: $o-gray-200 !default;
 $o-navbar-entry-color--hover: $o-black !default;

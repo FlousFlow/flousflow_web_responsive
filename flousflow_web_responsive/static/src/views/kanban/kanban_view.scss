@@ -8,7 +8,215 @@
             }
         }
         .input-group-append, .input-group-prepend {
-            border-left: 10px solid map-get($grays, '200');
+            border-inline-start: 10px solid map-get($grays, '200');
         }
     }
+}
+
+.o_kanban_view:not(.o_stock_kanban) .o_kanban_renderer {
+    --KanbanRecord-margin-v: 0;
+    --KanbanRecord-margin-h: 0;
+    --Card-padding-v: 10px;
+    --Card-padding-h: 14px;
+
+    .o_kanban_record:not(.o-kanban-button-new):not(.o_kanban_ghost) {
+        font-size: 13px;
+        --o-Badge-fontSize: 0.769234em;
+    }
+
+    @include media-breakpoint-up(md) {
+        gap: 16px;
+        padding: 0 16px 16px;
+
+        // Grouped kanban columns keep Odoo's edge-to-edge renderer spacing.
+        // The card spacing above applies to regular kanban boards only.
+        &.o_kanban_grouped {
+            gap: normal;
+            padding: 0;
+        }
+
+        .o_kanban_record:not(.o-kanban-button-new):not(.o_kanban_ghost) {
+            border-radius: 8px;
+        }
+    }
+
+    @include media-breakpoint-down(md) {
+        gap: normal;
+        padding: 0;
+
+        .o_kanban_record:not(.o-kanban-button-new):not(.o_kanban_ghost) {
+            margin: 0 0 2px;
+            border-radius: 0;
+        }
+    }
+}
+
+.o_card_record {
+    --Card-border-color: var(--border-color);
+}
+
+// Keep sample records readable in the project board. Enterprise does not fade
+// these placeholder project cards, while the generic Kanban sample-data rule
+// reduces their opacity to 0.06 and makes the whole page look empty.
+.o_project_kanban .o_view_sample_data .o_kanban_record {
+    opacity: 1;
+}
+
+// Enterprise marks project kanban cards with a color strip on the right edge.
+// Community has the same per-record color classes but does not render that strip.
+.o_project_kanban .o_card_record.o_kanban_record_colored::after {
+    position: absolute;
+    top: 0;
+    /*rtl:ignore*/
+    right: 0;
+    bottom: 0;
+    width: 4px;
+    /*rtl:ignore*/
+    border-left: 4px solid transparent;
+    /*rtl:ignore*/
+    border-right: 0;
+    /*rtl:ignore*/
+    border-radius: 0 8px 8px 0;
+    content: "";
+    display: block !important;
+}
+
+// Enterprise project cards omit the project alias. Keep it on the record, but
+// remove its extra line from the Kanban card.
+.o_project_kanban .o_project_kanban_body > div:has(> .oi[data-icon="mail"]) {
+    display: none;
+}
+
+@for $size from 2 through length($o-colors) {
+    .o_project_kanban .o_card_record.o_kanban_color_#{$size - 1}::after {
+        width: 7px;
+        /*rtl:ignore*/
+        border-right: 3px solid nth($o-colors, $size);
+    }
+}
+
+// Community can render the empty-project helper over its sample kanban cards.
+// Enterprise keeps the helper for a genuinely empty board only.
+.o_project_kanban:has(.o_kanban_record) .o_view_nocontent {
+    display: none;
+}
+
+// Enterprise sizes sales dashboard cards from their contents and preserves a
+// compact minimum width. Community's zero flex basis forces equal card widths.
+.o_website_sale_dashboard .o_dashboard_card {
+    flex: 1 1 auto;
+    min-width: 112px;
+}
+
+// Enterprise uses an 8px radius for the sales period summary panel.
+.o_website_sale_dashboard > .d-flex.flex-column.flex-md-row.border.rounded-3 {
+    border-radius: 8px !important;
+}
+
+// Enterprise lets narrow sales dashboard KPI labels wrap on mobile. Odoo 20
+// Community keeps these buttons nowrap, which makes the summary row too short
+// in Arabic and pulls the following list rows or kanban cards upward.
+@include media-breakpoint-down(md) {
+    .o_website_sale_dashboard .o_dashboard_card {
+        white-space: normal;
+    }
+}
+
+@include media-breakpoint-up(md) {
+    // Enterprise leaves the edge beside its RTL search panel flush while
+    // retaining spacing on the opposite side of the kanban cards.
+    body.o_rtl .o_kanban_view:not(.o_stock_kanban)
+        .o_component_with_search_panel .o_kanban_renderer {
+        padding-inline-start: 16px;
+        padding-inline-end: 0;
+    }
+}
+
+// Enterprise adds separation after product prices and prevents the price
+// column from shrinking inside product cards. Keep both layouts aligned.
+.o_card_product_record.o_card_record > .o_record_main > .d-flex.align-items-start.gap-2 {
+    margin-bottom: 0.25rem;
+
+    > .d-flex.flex-column {
+        flex-shrink: 0;
+    }
+}
+
+// Match the Enterprise stock operation dashboard independently from regular
+// kanban cards. The dashboard uses a two-column desktop grid and stacked,
+// edge-to-edge cards on narrow screens.
+.o_stock_dashboard_kanban_view .o_kanban_renderer {
+    --KanbanRecord-margin-v: 0;
+    --KanbanRecord-margin-h: 0;
+
+    .o_kanban_record {
+        font-size: 13px;
+
+        .btn-primary {
+            border-radius: 6px;
+        }
+
+        .o-dropdown {
+            border-radius: 4px;
+        }
+    }
+
+    .o_kanban_record:not(.o-kanban-button-new):not(.o_kanban_ghost) {
+        padding: 10px 14px;
+    }
+
+    @include media-breakpoint-up(md) {
+        --Kanban-gap: 16px;
+
+        .o_kanban_record:not(.o-kanban-button-new):not(.o_kanban_ghost) {
+            border-radius: 8px;
+        }
+    }
+
+    @include media-breakpoint-down(md) {
+        gap: normal;
+
+        .o_kanban_record:not(.o-kanban-button-new):not(.o_kanban_ghost) {
+            margin: 0 0 2px;
+            border-radius: 0;
+        }
+    }
+}
+
+// Match Enterprise's RTL flow for operation cards. Odoo's RTL asset build
+// flips the source declaration below, so the compiled value is RTL.
+body.o_rtl .o_stock_dashboard_kanban_view .o_kanban_renderer {
+    // RTL asset compilation turns this into RTL, matching the stock dashboard
+    // card sequence in Enterprise.
+    direction: ltr;
+}
+
+// Odoo 20 adds `mt-2` to the graph toolbar, shifting the canvas down by 8px.
+.o_graph_renderer > .d-flex.d-print-none.mt-2 {
+    margin-top: 0 !important;
+}
+
+body.o_rtl .o_graph_renderer .o_graph_button {
+    inline-size: 28px;
+    block-size: 23px;
+    padding: 2px 6px;
+    background-color: transparent;
+    border-color: transparent;
+    border-radius: 6px !important;
+    align-self: center;
+    flex: 0 0 28px;
+}
+
+body.o_rtl .o_graph_renderer .o_report_measures {
+    --btn-padding-y: 5px !important;
+    --btn-padding-x: 10px !important;
+}
+
+body.o_rtl .o_graph_renderer .o_switcher {
+    gap: 4px;
+    padding: 4px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    background-color: $o-view-background-color;
+    justify-content: space-between;
 }

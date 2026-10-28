@@ -10,7 +10,6 @@ import {
 } from "@web/webclient/actions/action_plugin";
 import { HomeMenu } from "./home_menu";
 
-import { render } from "@web/owl2/utils";
 import { Component, onMounted, onWillUnmount, proxy, xml, useProps } from "@odoo/owl";
 
 export const homeMenuService = {
@@ -31,22 +30,24 @@ export const homeMenuService = {
 
             setup() {
                 this.menus = useService("menu");
+                this.state = proxy({ apps: this.getApps() });
+                this.reorderApps = (order) => reorderApps(this.state.apps, order);
                 onMounted(() => this.onMounted());
                 onWillUnmount(this.onWillUnmount);
-                useBus(this.env.bus, "MENUS:APP-CHANGED", () => render(this));
+                useBus(this.env.bus, "MENUS:APP-CHANGED", () => {
+                    this.state.apps = this.getApps();
+                });
             }
             get homeMenuProps() {
+                return { apps: this.state.apps, reorderApps: this.reorderApps };
+            }
+            getApps() {
                 const homemenuConfig = JSON.parse(user.settings?.homemenu_config || "null");
-                const apps = proxy(
-                    computeAppsAndMenuItems(this.menus.getMenuAsTree("root")).apps
-                );
+                const apps = computeAppsAndMenuItems(this.menus.getMenuAsTree("root")).apps;
                 if (homemenuConfig) {
                     reorderApps(apps, homemenuConfig);
                 }
-                return {
-                    apps,
-                    reorderApps: (order) => reorderApps(apps, order),
-                };
+                return apps;
             }
             async onMounted() {
                 const { breadcrumbs } = this.env.config;

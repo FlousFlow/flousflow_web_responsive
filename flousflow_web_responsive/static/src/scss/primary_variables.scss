@@ -3,11 +3,16 @@
 /// They are available in every asset bundle.
 ///
 
+// Enterprise 20 uses a 6px base radius for buttons and form controls.
+$o-border-radius: 6px !default;
+$o-border-color: #dee2e6 !default;
+$o-form-check-input-border-color: #adb5bd !default;
+
 // Colors
 $o-white: #FFF !default;
 $o-black: #000 !default;
 
-$o-gray-100: #F9FAFB !default;
+$o-gray-100: #F8F9FA !default;
 $o-gray-200: #e7e9ed !default;
 $o-gray-300: #d8dadd !default;
 $o-gray-400: #9a9ca5 !default;
@@ -15,7 +20,11 @@ $o-gray-500: #7c7f89 !default;
 $o-gray-600: #5f636f !default;
 $o-gray-700: #374151 !default;
 $o-gray-800: #1F2937 !default;
-$o-gray-900: #111827 !default;
+$o-gray-900: #212529 !default;
+
+// Enterprise separates the control panel from white view cards with the
+// light webclient surface color.
+$o-control-panel-background-color: $o-gray-100 !default;
 
 $o-enterprise-color: #714B67 !default;
 $o-enterprise-action-color: #017e84 !default;

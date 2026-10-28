@@ -10,3 +10,28 @@
 .o_searchview {
    --SearchBar-background-color: #{$o-gray-100};
 }
+
+// Match the softer Enterprise surfaces inside the product catalog sidebar.
+.o_search_panel_wrap.o_product_catalog_search_panel {
+    > .d-flex.align-items-center > .btn-light {
+        --btn-bg: transparent;
+        --btn-border-color: transparent;
+        --btn-border-radius: 0.25rem;
+        --btn-active-border-color: #2ce0d3;
+        --btn-focus-shadow-rgb: 235, 235, 235;
+        --btn-disabled-bg: transparent;
+        --btn-disabled-color: #ebebeb;
+        --btn-disabled-border-color: transparent;
+    }
+
+    .o_search_panel_section > .d-flex > .btn-secondary {
+        --btn-bg: #{$o-gray-200};
+        --btn-border-color: #{$o-gray-300};
+        --btn-hover-bg: #{$o-gray-300};
+        --btn-hover-border-color: #{$o-gray-300};
+        --btn-disabled-bg: #{$o-gray-300};
+        --btn-disabled-color: #ebebeb;
+        --btn-disabled-border-color: #{$o-gray-300};
+        --btn-border-radius: 0.25rem;
+    }
+}

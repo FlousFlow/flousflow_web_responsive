@@ -12,3 +12,8 @@
     --NavBar-entry-backgroundColor--hover: #{$o-gray-300};
     --NavBar-entry-backgroundColor--focus: #{$o-gray-300};
 }
+
+body.o_home_menu_background .o_main_navbar .o_user_menu:is(:hover, :focus, .show) {
+    background-color: rgba(255, 255, 255, .1);
+    border-radius: 6px;
+}

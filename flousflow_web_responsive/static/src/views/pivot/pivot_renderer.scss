@@ -8,20 +8,39 @@
             }
         }
 
-        th > .o_group_by_menu  > .dropdown-menu {
-            .dropdown-item {
-                // caret centered vertically
-                .dropdown-toggle::after{
-                    top: 12px;
-                }
+        // Keep the nested group-by menu visible within narrow pivot tables,
+        // matching Enterprise's mobile dropdown placement.
+        th > .o_group_by_menu > .dropdown-menu .dropdown-item .dropdown-toggle::after {
+            top: 12px;
+        }
 
-                // nested dropdown should be *under* the parent, not on its side
-                .dropdown-menu {
-                    top: initial !important;
-                    left: 5% !important;
-                    width: 95%;
-                }
-            }
+        th > .o_group_by_menu > .dropdown-menu .dropdown-item .dropdown-menu {
+            width: 95%;
+            top: initial !important;
+            /*rtl:ignore*/
+            right: 5% !important;
         }
     }
+}
+
+body.o_rtl {
+    // Enterprise leaves pivot values on the view surface instead of applying
+    // the Community `bg-100` utility to each cell.
+    .o_pivot td.o_pivot_cell_value.bg-100 {
+        background-color: $o-view-background-color !important;
+    }
+
+    .o_pivot td.o_pivot_cell_value.bg-100.o_cell_hover {
+        background-color: rgba(var(--emphasis-color-rgb), 0.1) !important;
+    }
+
+    .o_pivot_buttons {
+        margin-top: 0 !important;
+
+        .btn {
+            --btn-padding-y: 5px !important;
+            --btn-padding-x: 10px !important;
+        }
+    }
+
 }

@@ -1,3 +1,20 @@
 // = ListRenderer
 // ============================================================================
 // No CSS hacks, variables overrides only
+
+.o_control_panel {
+    background-color: $o-gray-100;
+}
+
+.o_list_renderer {
+    --ListRenderer-thead-border-end-color: #{$o-gray-300};
+    background-color: $o-view-background-color;
+
+    .o_list_table .o_data_row {
+        border-bottom-color: $o-gray-300;
+    }
+
+    .o_list_table thead th {
+        color: $o-gray-700;
+    }
+}

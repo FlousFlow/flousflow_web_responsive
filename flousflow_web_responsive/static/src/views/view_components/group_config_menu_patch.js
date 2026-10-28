@@ -38,7 +38,6 @@ registry.category("group_config_items").add(
         isVisible: ({ permissions }) => permissions.canEditAutomations,
         class: "o_column_automations",
         icon: "wand_stars",
-        iconClass: "oi-filled",
     },
     { sequence: 25, force: true }
 );

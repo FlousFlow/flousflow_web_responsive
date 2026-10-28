@@ -1,0 +1,6 @@
+// Enterprise gives this menu 4px padding on each axis. Bootstrap's defaults
+// leave the Community version taller and shift its contents horizontally.
+.o-dropdown--group-config-menu {
+    --dropdown-padding-y: 0.25rem;
+    --dropdown-padding-x: 0.25rem;
+}

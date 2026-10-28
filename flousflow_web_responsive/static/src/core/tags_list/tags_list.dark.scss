@@ -1,8 +1,24 @@
 .o_tag {
-    @for $size from 1 through length($o-colors) {
+    border-width: 1px;
+    border-style: solid;
+
+    &.o_tag_color_0 {
+        --background-color: #{nth($o-colors-bg-subtle, 1)};
+        --color: #{nth($o-colors-text-emphasis, 1)};
+        border-color: #{nth($o-colors-border, 1)};
+
+        &::after {
+            --background-color: var(--background-color);
+            --color: var(--color);
+        }
+    }
+
+    // Color 0 is Odoo's neutral default tag, not a colored category tag.
+    @for $size from 2 through length($o-colors) {
         &.o_tag_color_#{$size - 1} {
-            --background-color: #{mix(nth($o-colors, $size), $o-view-background-color, 15%)};
-            --color: #{adjust-color(nth($o-colors, $size), $lightness: 5%, $saturation: -15%)};
+            --background-color: #{nth($o-colors-bg-subtle, $size)};
+            --color: #{nth($o-colors-text-emphasis, $size)};
+            border-color: #{nth($o-colors-border, $size)};
 
             &::after {
                 --background-color: var(--background-color);

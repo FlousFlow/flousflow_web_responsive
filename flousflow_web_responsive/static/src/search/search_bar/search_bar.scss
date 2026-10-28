@@ -1,0 +1,41 @@
+body.o_rtl .o_search_bar_menu {
+    // Keep the search sections in right-to-left reading order in Odoo's
+    // generated RTL asset; rtlcss would otherwise flip this to LTR.
+    /*rtl:ignore*/
+    direction: rtl;
+    border-radius: 12px;
+}
+
+.o_searchview_facet.rounded-2 {
+    --border-radius: 6px;
+}
+
+// Enterprise uses a 4px inset around the search autocomplete suggestions.
+// Bootstrap's default vertical-only padding makes the Community popup taller.
+.o_searchview_autocomplete {
+    padding: 4px;
+}
+
+// The Enterprise RTL search menu uses a narrower content width between the
+// tablet and compact desktop breakpoints. Keep its measured responsive width.
+@include media-breakpoint-only(lg) {
+    body.o_rtl .o_search_bar_menu {
+        width: calc(75vw - 427.094px) !important;
+    }
+}
+
+// Enterprise keeps the same proportional width through 1299px, then lets the
+// menu return to its natural content width on wider desktops.
+@media (min-width: 1200px) and (max-width: 1299.98px) {
+    body.o_rtl .o_search_bar_menu {
+        width: calc(75vw - 439.094px) !important;
+    }
+}
+
+@include media-breakpoint-down(md) {
+    body.o_rtl .o_search_bar_menu {
+        // Let the full filter, group-by, and favorites menu use the same
+        // 70vh limit as Enterprise instead of the shortened position limit.
+        max-height: 70vh !important;
+    }
+}

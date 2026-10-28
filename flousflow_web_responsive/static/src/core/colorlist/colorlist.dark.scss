@@ -1,8 +1,29 @@
-// Overrides the existing classes to fit the text-color of
-// tag_list.dark.scss
+// Match the Enterprise dark swatches and their readable foreground colors.
 @for $size from 2 through length($o-colors) {
   .o_colorlist_item_color_#{$size - 1} {
-      --background-color: #{adjust-color(nth($o-colors, $size), $lightness: -5%, $saturation: -15%)};
-      --color: #{mix(nth($o-colors, $size), $o-view-background-color, 15%)};
+      --background-color: #{nth($o-colors, $size)};
+      --color: #{nth($ff-colorlist-text-colors, $size)};
   }
+}
+
+// Enterprise uses a darker, white-text palette for partner chips in calendar
+// filters. Community ships the light palette for these classes in dark mode
+// and omits colors 30 through 55, so align the complete supported range.
+$ff-calendar-filter-dark-colors: (
+    #673c3c, #732121, #73461d, #654f00, #2a4b73, #6c1d6a, #73432e, #005d56,
+    #1d2a73, #732248, #00632e, #4b3773, #73374b, #377358, #735a2f, #73693f,
+    #465773, #652f73, #73354d, #19666e, #2c7342, #733433, #713e2d, #731644,
+    #4c7354, #73733a, #736c4b, #734040, #596771, #38724b, #6e3a73, #733a42,
+    #5d732e, #2b736d, #3a5173, #6d2b73, #732b36, #73502b, #59733a, #3a7073,
+    #294773, #733a68, #735f3a, #42732e, #2b7073, #3a4a73, #735a2b, #3b733a,
+    #3a6873, #2b4073, #733a59, #2b7346, #296573, #3a3b73, #732951, #38724b
+);
+
+@for $index from 0 through length($ff-calendar-filter-dark-colors) - 1 {
+    .o_calendar_filter[data-name="partner_ids"] .o_tag_color_#{$index} {
+        background-color: #{nth($ff-calendar-filter-dark-colors, $index + 1)} !important;
+        color: #fff !important;
+        border: 0;
+        font-weight: normal !important;
+    }
 }

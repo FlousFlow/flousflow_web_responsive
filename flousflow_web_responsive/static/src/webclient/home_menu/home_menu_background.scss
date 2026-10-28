@@ -1,9 +1,26 @@
 // Shared with web client and login screen
 .o_home_menu_background, .o_web_client.o_home_menu_background {
+    --homeMenu-bg-color: #fafafa;
+    --homeMenu-bg-image: radial-gradient(circle, rgba(40, 40, 40, 0.07) 1px, transparent 1.2px);
     background: {
-        size: cover;
+        size: 14px 14px;
         attachment: fixed;
         color: var(--homeMenu-bg-color, #{$o-gray-200});
         image: var(--homeMenu-bg-image, url("/flousflow_web_responsive/static/img/background-light.svg"));
     }
+}
+
+// Match the default Enterprise app switcher background in the light scheme.
+// Keep administrator-selected backgrounds and Studio previews untouched.
+body.o_web_client.o_home_menu_background:not(.o_home_menu_background_custom):not(.o_in_studio) {
+    background-color: #f8f9fa;
+    /*rtl:ignore*/
+    background-image:
+        linear-gradient(-45deg, #f8f9fa 0%, transparent 50%),
+        linear-gradient(-135deg, #f8f9fa 0%, transparent 30%, transparent 60%, #f8f9fa 95%),
+        linear-gradient(-180deg, #f8f9fa 0%, transparent 100%),
+        radial-gradient(circle at 50% 50%, rgba(233, 236, 239, 0.95) 20%, transparent 400%),
+        radial-gradient(#000 1px, #f8f9fa 1px);
+    background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat;
+    background-size: auto, auto, 100% 40%, auto, 12px 12px;
 }

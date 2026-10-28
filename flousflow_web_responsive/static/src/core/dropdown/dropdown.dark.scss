@@ -6,3 +6,23 @@
   --border-color: #{$dropdown-border-color};
   --o-input-border-color: #{$dropdown-border-color};
 }
+
+// Enterprise dark dropdown items use rounded hit targets, including the user menu.
+.o-dropdown--menu > .dropdown-item,
+.o-autocomplete--dropdown-menu .dropdown-item {
+  border-radius: 8px;
+}
+
+// Enterprise autocomplete menus use the same compact, rounded surface as
+// other dark dropdowns.
+.o-autocomplete--dropdown-menu {
+  padding: 4px;
+  border-color: #56575e;
+  border-radius: $o-border-radius-xl;
+}
+
+.o_optional_columns_dropdown {
+  min-width: 169px;
+  padding: 4px;
+  border-color: #56575e;
+}

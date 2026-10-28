@@ -35,3 +35,12 @@
         }
     }
 }
+
+// In an RTL horizontal notebook, the first tab sits at the right edge.
+body.o_rtl .o_notebook.horizontal .nav-item:first-child .nav-link {
+    border-start-start-radius: 6px;
+}
+
+body.o_rtl .o_notebook.horizontal .nav-item:last-child .nav-link {
+    border-start-end-radius: 6px;
+}

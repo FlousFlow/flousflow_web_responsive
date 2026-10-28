@@ -7,3 +7,9 @@
     --DashboardView__controlPanel-background-color: transparent;
     --DashboardView__pieChart-background-color: transparent;
 }
+
+// Dashboard charts exported as images are missing the spreadsheet theme class.
+// Apply the same dark-mode treatment used by Odoo's theme-dependent figures.
+.o-spreadsheet.dark .o-figure-wrapper:not(.os-theme-dependant) {
+    filter: var(--os-dark-mode-filter);
+}

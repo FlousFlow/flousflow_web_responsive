@@ -1,21 +1,24 @@
-$o-colors-original: lighten(#000, 46.7%), #e74e4e, #f4b660, #F7CD1F, #6cedeb, #8d5482,
-              #f07b50, #2C8397, #475577, #dc0457, #30C381, #9365B8 !default;
-
 $o-colors-secondary-original: #aa4b6b, #30C381, #97743a, #F7CD1F, #4285F4, #8E24AA,
                      #D6145F, #173e43, #348F50, #AA3A38, #795548, #5e0231,
                      #6be585, #999966, #e9d362, #b56969, #bdc3c7, #649173 !default;
 
-// In Odoo 20, $o-colors is already populated (12 colors) by web's
-// primary_variables.scss when this file runs in the dark bundles, so the
-// dark palette must be rebuilt into a local list and assigned, otherwise
-// appending would double its length and break loops assuming
-// length($o-colors) == length($o-colors-bg-subtle) (e.g. badge.scss).
-$-o-colors-dark: ();
-@each $-color in $o-colors-original {
-    $-adjusted: saturate(mix($-color, $o-black, 50%), 60%);
-    $-o-colors-dark: append($-o-colors-dark, $-adjusted);
-}
-$o-colors: $-o-colors-dark;
+// Odoo 20 Enterprise dark palette captured from the live reference. Keep the
+// base swatches, tag backgrounds, tag text, and tag outlines as separate
+// palettes so each component matches its Enterprise contrast treatment.
+$o-colors: #a2a2a2, #ef3f3f, #ef8f38, #b9940f, #529af1, #dd3ad9,
+    #f2885b, #0ea79b, #3753ef, #f04194, #0fb45c, #996cf3;
+
+$o-colors-bg-subtle: #2e2e2e, #58271f, #542d06, #392c02, #043e50, #3d2046,
+    #463324, #04413e, #172d53, #4a1b2f, #0d3715, #38305c;
+
+$o-colors-text-emphasis: #d7d7d7, #fec9bf, #fecca6, #eed592, #a0e3fe, #f1c5fe,
+    #ebd2bf, #8eebe3, #c3d9fe, #fec5d9, #b0e8b5, #d6d1fe;
+
+$o-colors-border: #b1b1b1, #f8907e, #ee9b56, #d1ad41, #37c2ef, #d396e6,
+    #d1a888, #1ccbc2, #86b1fd, #f28db4, #75c77f, #b0a2fd;
+
+$ff-colorlist-text-colors: #000000, #4c3238, #4c3e37, #47412d, #344053, #493150,
+    #4c3d3d, #25464a, #2f3553, #4c3245, #25483c, #3e3953;
 
 $-o-colors-secondary-dark: ();
 @each $-color in $o-colors-secondary-original {

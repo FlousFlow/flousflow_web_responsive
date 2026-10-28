@@ -3,10 +3,7 @@ import { browser } from "@web/core/browser/browser";
 import { cookie } from "@web/core/browser/cookie";
 import { user } from "@web/core/user";
 
-import { switchColorSchemeItem } from "./color_scheme_menu_items";
-
 const serviceRegistry = registry.category("services");
-const userMenuRegistry = registry.category("user_menuitems");
 
 export function systemColorScheme() {
     return browser.matchMedia("(prefers-color-scheme:dark)").matches ? "dark" : "light";
@@ -20,8 +17,6 @@ export const colorSchemeService = {
     dependencies: ["ui"],
 
     start(env, { ui }) {
-        userMenuRegistry.add("color_scheme.switch", switchColorSchemeItem);
-
         const setCurrentColorScheme = (scheme) => {
             let newColorScheme = systemColorScheme();
             if (["light", "dark"].includes(scheme)) {

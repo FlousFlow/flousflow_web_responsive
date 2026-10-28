@@ -3,6 +3,8 @@
 // No CSS hacks, variables overrides only
 
 .o_home_menu_background {
-    --homeMenu-bg-color: #000511;
-    --homeMenu-bg-image: url("/flousflow_web_responsive/static/img/background-dark.jpg");
+    --homeMenu-bg-color: #292A30;
+    --homeMenu-bg-image: radial-gradient(circle, rgba(255, 255, 255, .045) 1px, transparent 1.2px);
+    background-image: var(--homeMenu-bg-image);
+    background-size: 22px 22px;
 }
