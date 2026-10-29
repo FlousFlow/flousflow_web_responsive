@@ -37,10 +37,6 @@
 }
 
 body.o_rtl .o_control_panel {
-    .btn {
-        --btn-padding-y: 5px !important;
-        --btn-padding-x: 10px !important;
-    }
     padding-bottom: 16px;
     border-bottom: 0;
 
@@ -58,6 +54,13 @@ body.o_rtl .o_control_panel {
             background-color: transparent;
         }
     }
+}
+
+// Keep compact view switches consistent without forcing large padding on all
+// control-panel buttons. Sales and Purchase need that space for search/actions.
+body.o_rtl .o_control_panel .o_cp_switch_buttons .o_switch_view {
+    --btn-padding-y: 5px;
+    --btn-padding-x: 10px;
 }
 
 // Enterprise reserves room for its user-seat display below the user list

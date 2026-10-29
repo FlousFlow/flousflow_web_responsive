@@ -12,6 +12,34 @@ body.o_rtl .o_form_view {
 
 }
 
+// Sales and Purchase orders contain wide editable line tables. Keep the form
+// and its x2many scroller within the viewport, and let only the table scroll.
+body.o_rtl .o_form_view:has(.o_field_widget[name="order_line"]) {
+    min-width: 0;
+
+    .o_form_sheet_bg,
+    .o_form_sheet,
+    .o_group,
+    .o_inner_group,
+    .o_field_widget[name="order_line"],
+    .o_field_widget[name="order_line"] > div {
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    .o_field_widget[name="order_line"] .o_list_renderer {
+        max-width: 100%;
+        overflow-x: auto;
+        overscroll-behavior-inline: contain;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .o_field_widget[name="order_line"] .o_list_table {
+        min-width: 760px;
+        width: max-content;
+    }
+}
+
 @include media-breakpoint-up(md) {
     body.o_rtl .o_dialog {
         .modal-content {
@@ -68,6 +96,28 @@ body.o_rtl .o_form_view label[for^="color_scheme"] {
 }
 
 @include media-breakpoint-down(md) {
+    body.o_rtl .o_form_view:has(.o_field_widget[name="order_line"]) {
+        .o_form_sheet_bg {
+            padding-inline: 8px;
+        }
+
+        .o_form_sheet {
+            width: 100%;
+            max-width: 100%;
+            margin-inline: 0;
+        }
+
+        .o_form_statusbar {
+            overflow-x: auto;
+            overscroll-behavior-inline: contain;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .o_field_widget[name="order_line"] .o_list_table {
+            min-width: 680px;
+        }
+    }
+
     body.o_rtl .modal-content .o_form_sheet > .d-flex.flex-column.flex-md-row.align-items-center.gap-3 > .o_field_contact_image {
         flex: 0 0 200px;
         height: 200px;
