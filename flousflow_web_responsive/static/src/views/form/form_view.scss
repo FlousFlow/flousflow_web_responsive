@@ -7,6 +7,7 @@ body.o_rtl .o_form_view {
     }
 
     .o_form_statusbar {
+        margin-inline: 0;
         padding: 0 0 8px;
         flex-wrap: wrap;
         row-gap: 8px;
@@ -22,6 +23,12 @@ body.o_rtl .o_form_view {
         .o_statusbar_buttons > .btn {
             max-width: 100%;
             white-space: normal;
+        }
+
+        // The core statusbar keeps a physical left overlap on the first
+        // arrow even in RTL, which pushes that stage outside the form area.
+        .o_field_statusbar > .o_statusbar_status .o_arrow_button.o_first {
+            margin-left: 0;
         }
     }
 
