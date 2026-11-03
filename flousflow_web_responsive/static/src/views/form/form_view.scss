@@ -4,7 +4,6 @@ body.o_rtl .o_form_view {
 
     .o_form_sheet_bg {
         padding-top: 0;
-        container-type: inline-size;
     }
 
     .o_form_statusbar {
@@ -23,27 +22,6 @@ body.o_rtl .o_form_view {
         .o_statusbar_buttons > .btn {
             max-width: 100%;
             white-space: normal;
-        }
-    }
-
-    @container (max-width: 900px) {
-        .o_form_statusbar {
-            align-items: stretch;
-
-            .o_statusbar_buttons,
-            .o_field_statusbar {
-                flex: 1 1 100%;
-                max-width: 100%;
-            }
-
-            .o_statusbar_buttons {
-                justify-content: flex-start;
-            }
-
-            .o_field_statusbar > .o_statusbar_status {
-                margin-left: 0;
-                justify-content: flex-end;
-            }
         }
     }
 
