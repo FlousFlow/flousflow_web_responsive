@@ -18,7 +18,7 @@ Features
 This module is intended for Odoo 20 Community installations.
 """,
     "category": "Themes/Backend",
-    "version": "20.0.1.0.19",
+    "version": "20.0.1.0.20",
     "author": "FlousFlow",
     "maintainer": "FlousFlow",
     "website": "https://github.com/FlousFlow",
