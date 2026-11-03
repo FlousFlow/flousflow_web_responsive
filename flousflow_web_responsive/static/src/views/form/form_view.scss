@@ -27,6 +27,12 @@ body.o_rtl .o_form_view {
 
 }
 
+// Keep the Chatter actions in the same visual order as the rest of the RTL
+// interface: send/note/activity on the right, utility icons on the left.
+body.o_rtl .o_form_view .o-mail-Chatter-topbar {
+    direction: rtl;
+}
+
 // Sales and Purchase orders contain wide editable line tables. Keep the form
 // and its x2many scroller within the viewport, and let only the table scroll.
 body.o_rtl .o_form_view:has(.o_field_widget[name="order_line"]) {
